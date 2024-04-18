@@ -1,4 +1,4 @@
-package bean;
+package login;
 
 public class Customer implements java.io.Serializable {
 	
