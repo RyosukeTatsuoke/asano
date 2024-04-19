@@ -12,7 +12,7 @@ function togglePassword() {
 }
 </script>
 
-<form action="LoginAction" method="post">
+<form action="Login.action" method="post">
 <p>ログイン名<input type="text" name="username"></p>
 <p>パスワード<input type="password" id="password" name="password"><br>
 <input type="checkbox" onclick="togglePassword()"> Show Password<br>
