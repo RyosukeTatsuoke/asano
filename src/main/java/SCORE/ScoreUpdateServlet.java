@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/StudentUpdateServlet")
+@WebServlet("/ScoreUpdateServlet")
 public class ScoreUpdateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ScoreDAO dao = new ScoreDAO();
