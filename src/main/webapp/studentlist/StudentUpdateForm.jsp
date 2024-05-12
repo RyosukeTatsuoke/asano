@@ -12,7 +12,8 @@
     <h3>学籍番号: ${param.studentNo}</h3>
     
     <%-- 学生情報を変更するフォーム --%>
-    <form action="StudentUpdateServlet" method="post">
+    <form action="/StudentUpdateServlet" method="post">
+    
         <input type="hidden" name="studentNo" value="${param.studentNo}">
         
         <label for="name">名前:</label>

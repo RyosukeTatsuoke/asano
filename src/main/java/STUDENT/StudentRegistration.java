@@ -15,6 +15,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class StudentRegistration extends HttpServlet {
 
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/yourdatabase";
+    private static final String DB_USER = "username";
+    private static final String DB_PASSWORD = "password";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -26,32 +30,26 @@ public class StudentRegistration extends HttpServlet {
 
         // 未入力チェック
         if (isEmpty(entYear, studentNo, name, classNum)) {
-            forwardToRegistrationPage(request, response, "すべてのフィールドを入力してください");
+            forwardToRegistrationPage(request, response, "すべてのフィールドを入力してください", "/studentRegistration.jsp");
             return;
         }
 
         // データベースに接続して重複チェック
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourdatabase", "username", "password")) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             if (isStudentNoExists(conn, studentNo)) {
-                forwardToRegistrationPage(request, response, "学生番号が既に存在します");
+                forwardToRegistrationPage(request, response, "学生番号が既に存在します", "/studentRegistration.jsp");
                 return;
             }
 
             // 新しい学生をデータベースに追加
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO STUDENT (NO, NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) VALUES (?, ?, ?, ?, ?, ?)");
-            pstmt.setString(1, studentNo);
-            pstmt.setString(2, name);
-            pstmt.setString(3, entYear);
-            pstmt.setString(4, classNum);
-            pstmt.setBoolean(5, true); // 仮の値、実際のアプリケーションに応じて変更する必要があります
-            pstmt.setString(6, "oom"); // 仮の値、実際のアプリケーションに応じて変更する必要があります
-            pstmt.executeUpdate();
+            addStudentToDatabase(conn, entYear, studentNo, name, classNum);
 
             // 登録完了画面にリダイレクト
-            response.sendRedirect("/studentlist/registrationComplete.jsp");
+            response.sendRedirect("/studentlist/registrationSuccess.jsp");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+            forwardToRegistrationPage(request, response, "データベースエラーが発生しました", "/studentRegistration.jsp");
         }
     }
 
@@ -64,11 +62,11 @@ public class StudentRegistration extends HttpServlet {
         return false;
     }
 
-    private void forwardToRegistrationPage(HttpServletRequest request, HttpServletResponse response, String message)
+    private void forwardToRegistrationPage(HttpServletRequest request, HttpServletResponse response, String message, String page)
             throws ServletException, IOException {
         // メッセージを設定して再度登録画面を表示
         request.setAttribute("message", message);
-        RequestDispatcher rd = request.getRequestDispatcher("/studentRegistration.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher(page);
         rd.forward(request, response);
     }
 
@@ -78,6 +76,19 @@ public class StudentRegistration extends HttpServlet {
             try (ResultSet rs = pstmt.executeQuery()) {
                 return rs.next();
             }
+        }
+    }
+
+    private void addStudentToDatabase(Connection conn, String entYear, String studentNo, String name, String classNum)
+            throws SQLException {
+        try (PreparedStatement pstmt = conn.prepareStatement("INSERT INTO STUDENT (NO, NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) VALUES (?, ?, ?, ?, ?, ?)")) {
+            pstmt.setString(1, studentNo);
+            pstmt.setString(2, name);
+            pstmt.setString(3, entYear);
+            pstmt.setString(4, classNum);
+            pstmt.setBoolean(5, true); // 仮の値、実際のアプリケーションに応じて変更する必要があります
+            pstmt.setString(6, "oom"); // 仮の値、実際のアプリケーションに応じて変更する必要があります
+            pstmt.executeUpdate();
         }
     }
 }

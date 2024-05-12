@@ -15,8 +15,8 @@ public class ScoreDAO {
     private static final String URL = "jdbc:h2:tcp://localhost/~/score1";
     private static final String USERNAME = "sa";
     private static final String PASSWORD = "";
-    
-    private static String INSERT_SCORE_QUERY = "INSERT INTO SCORE (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)";
+
+    private static String INSERT_SCORE_QUERY = "INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)";
 
     // SQLクエリの定数化
     private static final String SELECT_ALL_STUDENTS_QUERY = "SELECT STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM FROM TEST";
@@ -25,16 +25,17 @@ public class ScoreDAO {
     private static final String DELETE_STUDENT_QUERY = "DELETE FROM TEST WHERE STUDENT_NO=?";
     private static final String SELECT_STUDENT_BY_NO_QUERY = "SELECT * FROM TEST WHERE STUDENT_NO = ?";
 
+    // JDBCドライバをロードするためのstaticブロック
+    static {
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
-    }
-
-    public String getInsertScoreQuery() {
-        return INSERT_SCORE_QUERY;
-    }
-
-    public void setInsertScoreQuery(String insertScoreQuery) {
-        INSERT_SCORE_QUERY = insertScoreQuery;
     }
 
     public List<SCOREList> getAllStudents() throws SQLException {
@@ -57,11 +58,11 @@ public class ScoreDAO {
 
         return studentList;
     }
-    
+
     public void addScore(SCOREList student) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_STUDENT_QUERY)) {
-            
+
             statement.setString(1, student.getStudentNo());
             statement.setString(2, student.getSubjectCd());
             statement.setString(3, student.getSchoolCd());
@@ -70,11 +71,11 @@ public class ScoreDAO {
             statement.executeUpdate();
         }
     }
-    
+
     public void updateScore(SCOREList student) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_STUDENT_QUERY)) {
-            
+
             statement.setString(1, student.getStudentNo());
             statement.setString(2, student.getSubjectCd());
             statement.setString(3, student.getSchoolCd());
@@ -84,22 +85,22 @@ public class ScoreDAO {
             statement.executeUpdate();
         }
     }
-    
+
     public void deleteScore(String studentNo) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_STUDENT_QUERY)) {
-            
+
             statement.setString(1, studentNo);
             statement.executeUpdate();
         }
     }
-    
+
     public SCOREList getScoreByNo(String studentNo) throws SQLException {
         SCOREList student = null;
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_STUDENT_BY_NO_QUERY)) {
-            
+
             statement.setString(1, studentNo);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -115,4 +116,12 @@ public class ScoreDAO {
 
         return student;
     }
+
+	public static String getINSERT_SCORE_QUERY() {
+		return INSERT_SCORE_QUERY;
+	}
+
+	public static void setINSERT_SCORE_QUERY(String iNSERT_SCORE_QUERY) {
+		INSERT_SCORE_QUERY = iNSERT_SCORE_QUERY;
+	}
 }

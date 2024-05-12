@@ -7,4 +7,14 @@
         <servlet-name>StudentCreateAction</servlet-name>
         <url-pattern>/StudentCreateAction</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+    <servlet-name>StudentUpdateServlet</servlet-name>
+    <servlet-class>STUDENT.StudentUpdateServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>StudentUpdateServlet</servlet-name>
+    <url-pattern>/StudentUpdateServlet</url-pattern>
+</servlet-mapping>
+    
 </web-app>

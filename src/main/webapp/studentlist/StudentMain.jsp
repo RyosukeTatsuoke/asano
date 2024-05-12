@@ -6,8 +6,8 @@
 
 <a href="StudentList.jsp">学生一覧表示</a>
 <a href="studentRegistration.jsp">学生追加</a>
-<a href="studentUpdate.jsp">学生情報変更</a>
-<a href="">学生削除</a>
+<a href="studentUpdateList.jsp">学生情報変更</a>
+<a href="delete_student.jsp">学生削除</a>
 
 <hr>
 

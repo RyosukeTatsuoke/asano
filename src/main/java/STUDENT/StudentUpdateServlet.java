@@ -22,6 +22,7 @@ public class StudentUpdateServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             // エラーハンドリング
+            response.sendRedirect("studentUpdateFailure.jsp"); // 失敗した場合のページへの遷移
         }
     }
 }

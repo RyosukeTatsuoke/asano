@@ -9,9 +9,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Student List</title>
+<script>
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+</script>
 </head>
 <body>
     <h1>Student List</h1>
+    <a href="javascript:void(0)" onclick="scrollToTop()">ページの一番上へ戻る</a>
     <table border="1">
         <tr>
             <th>NO</th>
@@ -30,11 +39,13 @@
                    <td><%= student.getNAME() %></td>
                    <td><%= Integer.toString(student.getENT_YEAR()) %></td>
                    <td><%= student.getCLASS_NUM() %></td>
-                   <td><%= student.isIS_ATTEND() %></td> <!-- メソッド名が isIS_ATTEND() に変わっていることに注意 -->
+                   <td><%= student.isIS_ATTEND() %></td>
                    <td><%= student.getSCHOOL_CD() %></td>
                </tr>
            <% }
         %>
     </table>
+    <br>
+    <a href="StudentMain.jsp">StudentMain.jspに戻る</a>
 </body>
 </html>

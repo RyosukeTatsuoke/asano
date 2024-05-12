@@ -9,9 +9,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Score List</title>
+<script>
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+</script>
 </head>
 <body>
     <h1>Score List</h1>
+    <a href="javascript:void(0)" onclick="scrollToTop()">ページの一番上へ戻る</a>
     <table border="1">
         <tr>
             <th>学生番号</th>
@@ -19,6 +28,7 @@
             <th>学校コード</th>
             <th>得点</th>
             <th>クラス</th>
+            <th>操作</th>
         </tr>
         <% 
            ScoreDAO dao = new ScoreDAO();
@@ -30,11 +40,12 @@
                    <td><%= student.getSchoolCd() %></td>
                    <td><%= student.getPoint() %></td>
                    <td><%= student.getClassNum() %></td>
-                   <td><a href=".jsp?studentNo=${student.NO}">変更</a></td>
-                   
+                   <td><a href="scoreUpdateForm.jsp?studentNo=<%= student.getStudentNo() %>">変更</a></td>
                </tr>
            <% }
         %>
     </table>
+    <br>
+    <a href="scoreMain.jsp">scoreMain.jspに戻る</a>
 </body>
 </html>
