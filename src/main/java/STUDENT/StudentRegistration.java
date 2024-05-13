@@ -15,9 +15,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class StudentRegistration extends HttpServlet {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/yourdatabase";
-    private static final String DB_USER = "username";
-    private static final String DB_PASSWORD = "password";
+    private static final String DB_URL = "jdbc:h2:tcp://localhost/~/score1";
+    private static final String DB_USER = "sa";
+    private static final String DB_PASSWORD = "";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -1,0 +1,49 @@
+/* スタイルリセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ページ全体のスタイル */
+body {
+    font-family: "MS Mincho", "ＭＳ 明朝", serif; /* 明朝体の指定 */
+    background-color: #f0f8ff; /* 水色 */
+    padding: 20px;
+}
+
+/* 見出しのスタイル */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000; /* 下線 */
+    line-height: 0.1em; /* 下線の間隔を調整 */
+}
+
+h1 span {
+    background: #f0f8ff; /* 背景色と同じ色で文字を覆う */
+    padding: 0 10px; /* 文字の周りに余白を追加して見やすくする */
+}
+
+/* リンクのスタイル */
+a {
+    color: #0000ee; /* リンクの色 */
+    text-decoration: none;
+    transition: color 0.3s ease; /* 色の変化にアニメーションを追加 */
+}
+
+a:hover {
+    color: #800080; /* ホバー時の色（紫色） */
+}
+
+/* リンクのコンテナのスタイル */
+.links-container {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* リンクのコンテナ内の各リンクのスタイル */
+.links-container a {
+    display: block;
+    margin-bottom: 10px;
+}
