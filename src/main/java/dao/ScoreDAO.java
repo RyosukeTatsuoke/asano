@@ -12,10 +12,6 @@ import bean.SCOREList;
 
 public class ScoreDAO {
 
-    private static final String URL = "jdbc:h2:tcp://localhost/~/score1";
-    private static final String USERNAME = "sa";
-    private static final String PASSWORD = "";
-
     private static String INSERT_SCORE_QUERY = "INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)";
 
     // SQLクエリの定数化
@@ -35,7 +31,7 @@ public class ScoreDAO {
     }
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        return DriverManager.getConnection("jdbc:h2:tcp://localhost/~/score1", "sa", "");
     }
 
     public List<SCOREList> getAllStudents() throws SQLException {

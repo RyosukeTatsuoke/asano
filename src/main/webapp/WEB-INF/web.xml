@@ -1,20 +1,101 @@
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+<web-app>
+    <!-- ScoreDeleteServlet -->
     <servlet>
-        <servlet-name>StudentCreateAction</servlet-name>
-        <servlet-class>STUDENT.StudentCreateAction</servlet-class>
+        <servlet-name>ScoreDelete</servlet-name>
+        <servlet-class>ScoreDeleteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>StudentCreateAction</servlet-name>
-        <url-pattern>/StudentCreateAction</url-pattern>
+        <servlet-name>ScoreDelete</servlet-name>
+        <url-pattern>/deleteScore</url-pattern>
     </servlet-mapping>
-    
+
+    <!-- ScoreListServlet -->
     <servlet>
-    <servlet-name>StudentUpdateServlet</servlet-name>
-    <servlet-class>STUDENT.StudentUpdateServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>StudentUpdateServlet</servlet-name>
-    <url-pattern>/StudentUpdateServlet</url-pattern>
-</servlet-mapping>
-    
+        <servlet-name>ScoreList</servlet-name>
+        <servlet-class>ScoreListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScoreList</servlet-name>
+        <url-pattern>/listScore</url-pattern>
+    </servlet-mapping>
+
+    <!-- ScoreRegisterServlet -->
+    <servlet>
+        <servlet-name>ScoreRegister</servlet-name>
+        <servlet-class>ScoreRegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScoreRegister</servlet-name>
+        <url-pattern>/registerScore</url-pattern>
+    </servlet-mapping>
+
+    <!-- ScoreUpdateServlet -->
+    <servlet>
+        <servlet-name>ScoreUpdate</servlet-name>
+        <servlet-class>ScoreUpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScoreUpdate</servlet-name>
+        <url-pattern>/updateScore</url-pattern>
+    </servlet-mapping>
+
+    <!-- StudentAction -->
+    <servlet>
+        <servlet-name>StudentAction</servlet-name>
+        <servlet-class>StudentAction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentAction</servlet-name>
+        <url-pattern>/studentAction</url-pattern>
+    </servlet-mapping>
+
+    <!-- StudentDeleteServlet -->
+    <servlet>
+        <servlet-name>StudentDelete</servlet-name>
+        <servlet-class>StudentDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentDelete</servlet-name>
+        <url-pattern>/deleteStudent</url-pattern>
+    </servlet-mapping>
+
+    <!-- StudentRegistration -->
+    <servlet>
+        <servlet-name>StudentRegistration</servlet-name>
+        <servlet-class>StudentRegistration</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentRegistration</servlet-name>
+        <url-pattern>/registerStudent</url-pattern>
+    </servlet-mapping>
+
+    <!-- StudentRegistrationServlet -->
+    <servlet>
+        <servlet-name>StudentRegistrationServlet</servlet-name>
+        <servlet-class>StudentRegistrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentRegistrationServlet</servlet-name>
+        <url-pattern>/registerStudentServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- StudentSearchServlet -->
+    <servlet>
+        <servlet-name>StudentSearch</servlet-name>
+        <servlet-class>StudentSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentSearch</servlet-name>
+        <url-pattern>/searchStudent</url-pattern>
+    </servlet-mapping>
+
+    <!-- StudentUpdateServlet -->
+    <servlet>
+        <servlet-name>StudentUpdate</servlet-name>
+        <servlet-class>StudentUpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentUpdate</servlet-name>
+        <url-pattern>/updateStudent</url-pattern>
+    </servlet-mapping>
 </web-app>

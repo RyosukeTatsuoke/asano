@@ -30,10 +30,24 @@ a {
     color: #0000ee; /* リンクの色 */
     text-decoration: none;
     transition: color 0.3s ease; /* 色の変化にアニメーションを追加 */
+    position: relative; /* 追加 */
+    display: inline-block; /* 追加 */
 }
 
-a:hover {
-    color: #800080; /* ホバー時の色（紫色） */
+a::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    content: '';
+    width: 0;
+    height: 2px;
+    background-color: #31aae2; /* 下線の色 */
+    transition: .3s;
+    transform: translateX(-50%);
+}
+
+a:hover::after {
+    width: 100%;
 }
 
 /* リンクのコンテナのスタイル */
