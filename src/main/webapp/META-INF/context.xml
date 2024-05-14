@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
 <Context reloadable="true">
-	<Resorce
+	<Resource
 		name="jdbc/score1"
 		auth="Container"
 		type="javax.sql.DataSource"
@@ -9,5 +9,5 @@
 		url="jdbc:h2:tcp://localhost/~/score1"
 		username="sa"
 		password="password"
-	></Resorce>
+	/>
 </Context>
