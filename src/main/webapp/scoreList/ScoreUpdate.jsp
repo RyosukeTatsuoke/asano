@@ -14,7 +14,7 @@
         <label for="schoolCd">学校コード:</label>
         <input type="text" id="schoolCd" name="schoolCd"><br>
         <label for="no">NO:</label>
-        <input type="text" id="no" name="no"><br>
+        <input type="text" id="no" name="nl,/;o"><br>
         <label for="point">得点:</label>
         <input type="text" id="point" name="point"><br>
         <label for="classNum">クラス:</label>

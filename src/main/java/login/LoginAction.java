@@ -12,7 +12,7 @@ public class LoginAction extends Action {
 			) throws Exception {
 		HttpSession session=request.getSession();
 		
-		String login=request.getParameter("login");
+		String login=request.getParameter("username");
 		String password=request.getParameter("password");
 		CustomerDAO dao=new CustomerDAO();
 		Customer customer=dao.search(login, password);

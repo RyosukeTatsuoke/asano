@@ -9,6 +9,7 @@ public class SCOREList implements Serializable {
     private String schoolCd;
     private int point;
     private int classNum;
+    private int no; // 新しいフィールド
 
     // コンストラクタ
     public SCOREList() {
@@ -54,5 +55,13 @@ public class SCOREList implements Serializable {
 
     public void setClassNum(int classNum) {
         this.classNum = classNum;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
     }
 }

@@ -15,7 +15,7 @@ public class CustomerDAO extends DAO {
 		
 		PreparedStatement st;
 		st=con.prepareStatement(
-				"select * from customer where login=? and password=?");
+				"select * from teacher where login=? and password=?");
 		st.setString(1, login);
 		st.setString(2, password);
 		ResultSet rs=st.executeQuery();
@@ -23,7 +23,7 @@ public class CustomerDAO extends DAO {
 		while (rs.next()) {
 			customer=new Customer();
 			customer.setId(rs.getInt("id"));
-			customer.setLogin(rs.getString("login"));
+			customer.setLogin(rs.getString("name"));
 			customer.setPassword(rs.getString("password"));
 		}
 		st.close();
