@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,15 +35,18 @@ public class GAKUSEIListDAO {
     }
 
     public void addStudent(GAKUSEIList student) {
+        int newStudentNo = getLastStudentNo() + 1; // NO列の値を生成
+
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "INSERT INTO STUDENT (NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) VALUES (?, ?, ?, ?, ?)")) {
+                     "INSERT INTO STUDENT (NO, NAME, ENT_YEAR, CLASS_NUM, IS_ATTEND, SCHOOL_CD) VALUES (?, ?, ?, ?, ?, ?)")) {
 
-            statement.setString(1, student.getNAME());
-            statement.setInt(2, student.getENT_YEAR());
-            statement.setInt(3, student.getCLASS_NUM());
-            statement.setBoolean(4, student.isIS_ATTEND());
-            statement.setString(5, student.getSCHOOL_CD());
+            statement.setInt(1, newStudentNo); // NO列に値を設定
+            statement.setString(2, student.getNAME());
+            statement.setInt(3, student.getENT_YEAR());
+            statement.setInt(4, student.getCLASS_NUM());
+            statement.setBoolean(5, student.isIS_ATTEND());
+            statement.setString(6, student.getSCHOOL_CD());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,6 +97,25 @@ public class GAKUSEIListDAO {
         }
 
         return student;
+    }
+
+    public int getLastStudentNo() {
+        int lastStudentNo = 0;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT MAX(NO) AS LAST_NO FROM STUDENT");
+             ResultSet resultSet = statement.executeQuery()) {
+
+            if (resultSet.next()) {
+                lastStudentNo = resultSet.getInt("LAST_NO");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // ここでSQLExceptionを処理します。
+        } catch (Exception e) {
+            e.printStackTrace();
+            // ここでその他の例外を処理します。
+        }
+        return lastStudentNo;
     }
 
     private GAKUSEIList extractStudentFromResultSet(ResultSet resultSet) throws Exception {

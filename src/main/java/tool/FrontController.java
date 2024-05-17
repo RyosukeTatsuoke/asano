@@ -32,6 +32,8 @@ public class FrontController extends HttpServlet {
 			)throws ServletException, IOException {
 		doPost(request, response);
 	}
+	
+	
 
 
 }

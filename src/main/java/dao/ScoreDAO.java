@@ -12,13 +12,11 @@ import bean.SCOREList;
 
 public class ScoreDAO {
 
-    private static String INSERT_SCORE_QUERY = "INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)";
-
     // SQLクエリの定数化
     private static final String SELECT_ALL_STUDENTS_QUERY = "SELECT STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM FROM TEST";
     private static final String INSERT_STUDENT_QUERY = "INSERT INTO TEST (STUDENT_NO, SUBJECT_CD, SCHOOL_CD, NO, POINT, CLASS_NUM) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_STUDENT_QUERY = "UPDATE TEST SET STUDENT_NO=?, SUBJECT_CD=?, SCHOOL_CD=?, NO=?, POINT=?, CLASS_NUM=? WHERE STUDENT_NO=?";
-    private static final String DELETE_STUDENT_QUERY = "DELETE FROM TEST WHERE STUDENT_NO=?";
+    private static final String DELETE_STUDENT_QUERY = "DELETE FROM TEST WHERE STUDENT_NO=? AND SUBJECT_CD=? AND SCHOOL_CD=? AND NO=?";
     private static final String SELECT_STUDENT_BY_NO_QUERY = "SELECT * FROM TEST WHERE STUDENT_NO = ?";
 
     // JDBCドライバをロードするためのstaticブロック
@@ -46,6 +44,7 @@ public class ScoreDAO {
                 student.setStudentNo(resultSet.getString("STUDENT_NO"));
                 student.setSubjectCd(resultSet.getString("SUBJECT_CD"));
                 student.setSchoolCd(resultSet.getString("SCHOOL_CD"));
+                student.setNo(resultSet.getInt("NO"));
                 student.setPoint(resultSet.getInt("POINT"));
                 student.setClassNum(resultSet.getInt("CLASS_NUM"));
                 studentList.add(student);
@@ -62,8 +61,9 @@ public class ScoreDAO {
             statement.setString(1, student.getStudentNo());
             statement.setString(2, student.getSubjectCd());
             statement.setString(3, student.getSchoolCd());
-            statement.setInt(4, student.getPoint());
-            statement.setInt(5, student.getClassNum());
+            statement.setInt(4, student.getNo());
+            statement.setInt(5, student.getPoint());
+            statement.setInt(6, student.getClassNum());
             statement.executeUpdate();
         }
     }
@@ -75,18 +75,22 @@ public class ScoreDAO {
             statement.setString(1, student.getStudentNo());
             statement.setString(2, student.getSubjectCd());
             statement.setString(3, student.getSchoolCd());
-            statement.setInt(4, student.getPoint());
-            statement.setInt(5, student.getClassNum());
-            statement.setString(6, student.getStudentNo());
+            statement.setInt(4, student.getNo());
+            statement.setInt(5, student.getPoint());
+            statement.setInt(6, student.getClassNum());
+            statement.setString(7, student.getStudentNo());
             statement.executeUpdate();
         }
     }
 
-    public void deleteScore(String studentNo) throws SQLException {
+    public void deleteScore(String studentNo, String subjectCd, String schoolCd, String no) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_STUDENT_QUERY)) {
 
             statement.setString(1, studentNo);
+            statement.setString(2, subjectCd);
+            statement.setString(3, schoolCd);
+            statement.setString(4, no);
             statement.executeUpdate();
         }
     }
@@ -104,6 +108,7 @@ public class ScoreDAO {
                     student.setStudentNo(resultSet.getString("STUDENT_NO"));
                     student.setSubjectCd(resultSet.getString("SUBJECT_CD"));
                     student.setSchoolCd(resultSet.getString("SCHOOL_CD"));
+                    student.setNo(resultSet.getInt("NO"));
                     student.setPoint(resultSet.getInt("POINT"));
                     student.setClassNum(resultSet.getInt("CLASS_NUM"));
                 }
@@ -112,12 +117,4 @@ public class ScoreDAO {
 
         return student;
     }
-
-	public static String getINSERT_SCORE_QUERY() {
-		return INSERT_SCORE_QUERY;
-	}
-
-	public static void setINSERT_SCORE_QUERY(String iNSERT_SCORE_QUERY) {
-		INSERT_SCORE_QUERY = iNSERT_SCORE_QUERY;
-	}
 }
